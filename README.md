@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Unsplash is a personal web project designed to replicate the popular image gallery, Unsplash. It leverages the Unsplash API to fetch and display images based on user searches. Key features include displaying images along with the photographer's name and location where the photo was taken. When an image is clicked, it opens in a modal with a slider, allowing users to navigate through images smoothly. Additionally, a download button enables users to save images directly.
