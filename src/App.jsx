@@ -140,7 +140,7 @@ function App() {
                           urlsToDisplay[selectedImageIndex].urls.full
                         )
                       }
-                      className="mt-3 text-white bg-black rounded p-2 flex gap-3">
+                      className="mt-3 text-white bg-black hover:bg-[#111] transition ease-in-out duration-300 rounded p-2 flex gap-3 cursor-pointer">
                       Download <GoDownload />
                     </button>
                   </div>
@@ -164,7 +164,6 @@ function App() {
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="relative p-5">
-                
               {/* Close Button */}
               <motion.button
                 whileHover={{ scale: 1.2 }}
@@ -221,7 +220,7 @@ function App() {
                         urlsToDisplay[selectedImageIndex].urls.full
                       )
                     }
-                    className="mt-3 text-white bg-black rounded p-2 flex gap-3">
+                    className="mt-3 text-white bg-black rounded p-2 flex gap-3 cursor-pointer hover:bg-[#111] transition ease-in-out duration-300">
                     Free Download <GoDownload />
                   </button>
                 </div>
