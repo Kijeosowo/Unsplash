@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GoDownload } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
+import Masonry from "react-masonry-css";
 
 function App() {
   const [urlsToDisplay, setUrlsToDisplay] = useState([]);
@@ -21,7 +22,7 @@ function App() {
     setLoadingImages(true);
     try {
       const response = await axios.get(
-        `https://api.unsplash.com/search/photos?query=${query}&client_id=${apiKey}&per_page=8`
+        `https://api.unsplash.com/search/photos?query=${query}&client_id=${apiKey}&per_page=20`
       );
       setUrlsToDisplay(response.data.results);
       setSearchTerm(query);
@@ -77,9 +78,15 @@ function App() {
     document.body.removeChild(link);
   };
 
+  const breakpointColumnsObj = {
+    default: 3,
+    1024: 2, 
+    640: 1, 
+  };
+
   return (
     <div>
-      {/* Search Component */}
+      {/* Search Bar */}
       <div className="flex flex-col justify-center items-center p-32 bg-[#DCE3EB]">
         <div className="bg-white shadow-lg p-3 rounded-lg lg:w-[100%] w-[100%] flex gap-3">
           <CiSearch className="text-2xl text-gray-500" />
@@ -91,7 +98,6 @@ function App() {
             className="w-full outline-none"
           />
         </div>
-
         {!isDefaultSearch && searchTerm && (
           <h2 className="text-center text-2xl font-semibold mt-5 text-[#263343]">
             Search results for{" "}
@@ -102,40 +108,40 @@ function App() {
         )}
       </div>
 
-      {/* Image Grid Component */}
-      <div className="lg:grid lg:grid-cols-3 grid-cols-1 gap-5 lg:px-48 -mt-10 pb-20">
+      {/* Image Staggered Grid */}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="flex gap-10 lg:px-48 px-10 -mt-20"
+        columnClassName="staggered-column">
         {loadingImages
           ? Array(8)
               .fill(0)
               .map((_, index) => (
                 <div
                   key={index}
-                  className="w-full h-60 bg-gray-300 animate-pulse duration-50 rounded-lg"></div>
+                  className="w-full h-60 bg-gray-300 animate-pulse duration-50 m-10 rounded-lg"></div>
               ))
           : urlsToDisplay.map((url, index) => (
               <div
                 key={index}
-                className="relative rounded-lg overflow-hidden cursor-pointer group lg:py-0 py-2 ml-2 mr-2"
+                className="relative rounded-lg overflow-hidden cursor-pointer py-5 group"
                 onClick={() => handleImageClick(index)}>
                 {/* Image */}
                 <img
                   src={url.urls.small}
                   alt={url.alt_description}
-                  className="w-full h-60 object-cover rounded-lg group-hover:scale-120 transition ease-in-out duration-300"
+                  className="w-full object-cover rounded-lg group-hover:scale-102 transition ease-in-out duration-300"
                 />
-
-                {/* Hover Overlay */}
-                <div className="absolute bottom-0 left-0 w-full p-5 text-white bg-gradient-to-t from-black to-transparent">
-                  <div>
-                    <h1 className="text-[1.3rem]">{url.user.name}</h1>
-                    <p className="text-xs text-white">
-                      {url.user.location || "Unknown"}
-                    </p>
-                  </div>
+                {/* Overlay */}
+                <div className="absolute bottom-5 w-full p-5 text-white bg-gradient-to-t from-black to-transparent rounded-bl-[10px] rounded-br-[10px]">
+                  <h1 className="text-[1.3rem]">{url.user.name}</h1>
+                  <p className="text-xs text-white">
+                    {url.user.location || "Unknown"}
+                  </p>
                 </div>
               </div>
             ))}
-      </div>
+      </Masonry>
 
       {/* Modal Component */}
       {selectedImageIndex !== null && urlsToDisplay[selectedImageIndex] && (
@@ -209,7 +215,7 @@ function App() {
                       )
                     }
                     className="mt-3 text-white bg-black rounded p-2 flex gap-3 cursor-pointer hover:bg-[#111] transition ease-in-out duration-300">
-                    Free Download <GoDownload />
+                    Free Download <GoDownload className="mt-1" />
                   </button>
                 </div>
               </div>
