@@ -125,24 +125,12 @@ function App() {
                 />
 
                 {/* Hover Overlay */}
-                <div className="flex justify-between absolute bottom-0 left-0 w-full p-5 text-white bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-0 left-0 w-full p-5 text-white bg-gradient-to-t from-black to-transparent">
                   <div>
-                    <h1 className="text-lg font-semibold">{url.user.name}</h1>
-                    <p className="text-sm text-stone-400">
+                    <h1 className="text-[1.3rem]">{url.user.name}</h1>
+                    <p className="text-xs text-white">
                       {url.user.location || "Unknown"}
                     </p>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() =>
-                        handleDownload(
-                          urlsToDisplay[selectedImageIndex].urls.full
-                        )
-                      }
-                      className="mt-3 text-white bg-black hover:bg-[#111] transition ease-in-out duration-300 rounded p-2 flex gap-3 cursor-pointer">
-                      Download <GoDownload />
-                    </button>
                   </div>
                 </div>
               </div>
@@ -157,7 +145,7 @@ function App() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 flex items-center justify-center bg-black/70">
+            className="fixed inset-0 flex items-center justify-center bg-black/40">
             <motion.div
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
@@ -177,7 +165,7 @@ function App() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute left-0 z-100 top-1/2 transform -translate-y-1/2 bg-black/50 p-3 rounded-full text-white text-xl hover:bg-black transition"
+                className="absolute -left-50 z-100 top-1/2 transform -translate-y-1/2 bg-white p-5 rounded-full text-black text-sm hover:bg-black/10 hover:text-white transition ease-in-out duration-300"
                 onClick={handlePrev}>
                 <FaChevronLeft />
               </motion.button>
@@ -186,7 +174,7 @@ function App() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="absolute right-0 z-100 top-1/2 transform -translate-y-1/2 bg-black/50 p-3 rounded-full text-white text-xl hover:bg-black transition"
+                className="absolute -right-50 z-100 top-1/2 transform -translate-y-1/2 bg-white p-5 rounded-full text-black text-sm hover:bg-black/10 hover:text-white transition ease-in-out duration-300"
                 onClick={handleNext}>
                 <FaChevronRight />
               </motion.button>
@@ -201,10 +189,10 @@ function App() {
                   transition={{ duration: 0.4 }}
                   src={urlsToDisplay[selectedImageIndex].urls.regular}
                   alt={urlsToDisplay[selectedImageIndex].alt_description}
-                  className="max-h-[80vh] w-auto object-contain"
+                  className="max-h-[80vh] w-auto object-contain rounded-tl-[10px] rounded-tr-[10px]"
                 />
 
-                <div className="p-5 bg-white flex justify-between w-full">
+                <div className="p-5 bg-white flex justify-between w-full rounded-br-[10px] rounded-bl-[10px]">
                   <div>
                     <h1 className="text-lg font-semibold text-[#263343]">
                       {urlsToDisplay[selectedImageIndex].user.name}
